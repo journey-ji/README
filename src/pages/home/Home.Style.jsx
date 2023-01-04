@@ -1,12 +1,11 @@
 import styled from 'styled-components';
-// 주석처리된 코드는 추후 반응형 작업 시 수정 예정입니다
 
 export const Home = styled.section`
   position: relative;
-  width: 390px;
-  height: 820px;
-  /* max-height: calc(100vh - 60px); */
-  /* overflow-y: scroll; */
+  overflow-y: scroll;
+  ::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera*/
+  }
 `;
 
 export const HomeTit = styled.h2`
@@ -23,9 +22,9 @@ export const NoPostsPage = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  min-height: calc(100vh - 109px);
+  margin-bottom: 61px;
   text-align: center;
-  height: 760px;
-  /* min-height: calc(100vh - 110px); */
 `;
 
 export const LogoImg = styled.img`
@@ -43,7 +42,6 @@ export const SearchTxt = styled.p`
 `;
 
 export const FeedPage = styled.div`
-  height: 760px;
   overflow-y: scroll;
   ::-webkit-scrollbar {
     display: none; /* Chrome, Safari, Opera*/
@@ -56,12 +54,4 @@ export const PostsContUl = styled.ul`
   gap: 30px;
   padding: 20px 16px;
   margin-bottom: 61px;
-`;
-
-export const TabMenuCont = styled.div`
-  position: absolute;
-  /* position: fixed; */
-  bottom: 0px;
-  background-color: #ffffff;
-  z-index: 20;
 `;

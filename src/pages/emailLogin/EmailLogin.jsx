@@ -7,6 +7,7 @@ import {
   accountnameData,
   emailData,
   introData,
+  isLogin,
   passwordData,
   profileImageData,
   usernameData,
@@ -14,17 +15,13 @@ import {
 
 import InputBox from '../../common/inputBox/InputBox';
 import Button from '../../common/button/Button';
-import loginAPI from '../../api/emailLoginAPI';
+import { emailLoginAPI } from '../../api/mandarinAPI';
 
 const EmailLoginPage = () => {
   const navigate = useNavigate();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  // const [username, setUsername] = useState('');
-  // const [accountname, setAccountname] = useState('');
-  // const [intro, setIntro] = useState('');
-  // const [image, setImage] = useState('');
   const [emailError, setEmailError] = useState('');
   const [emailValid, setEmailValid] = useState(false);
   const [passwordError, setPasswordError] = useState('');
@@ -38,14 +35,7 @@ const EmailLoginPage = () => {
   const setAccountNameData = useSetRecoilState(accountnameData);
   const setIntroData = useSetRecoilState(introData);
   const setProfileImageData = useSetRecoilState(profileImageData);
-
-  // const handleData = (e) => {
-  //   if (e.target.type === 'email') {
-  //     setEmail(e.target.value);
-  //   } else if (e.target.type === 'password') {
-  //     setPassword(e.target.value);
-  //   }
-  // };
+  const setIsLoginState = useSetRecoilState(isLogin);
 
   // 이메일 유효성 검사
   const emailValidator = (e) => {
@@ -94,7 +84,7 @@ const EmailLoginPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (btnActive === true) {
-      const data = await loginAPI(email, password);
+      const data = await emailLoginAPI(email, password);
 
       if (data.message === '이메일 또는 비밀번호가 일치하지 않습니다.') {
         setIsPasswordRed(true);
@@ -108,8 +98,8 @@ const EmailLoginPage = () => {
         setAccountNameData(data.user.accountname);
         setIntroData(data.user.intro);
         setProfileImageData(data.user.image);
-        console.log(data.message);
-        navigate('/', {
+        setIsLoginState(true);
+        navigate('/home', {
           state: {
             email,
             password,
@@ -120,7 +110,7 @@ const EmailLoginPage = () => {
   };
 
   return (
-    <S.LoginSec>
+    <section className='wrapper-contents max-width min-width'>
       <S.LoginTit>로그인</S.LoginTit>
       <S.LoginForm onSubmit={handleSubmit}>
         <InputBox
@@ -147,7 +137,7 @@ const EmailLoginPage = () => {
           display={isPasswordRed ? 'yes' : null}
           message={passwordError}
         />
-        <S.div>
+        <S.ButtonWrap>
           <Button
             type='submit'
             size='lg'
@@ -156,10 +146,10 @@ const EmailLoginPage = () => {
             disabled={emailValid && passwordValid ? null : 'disabled'}
             message={passwordError}
           />
-        </S.div>
+        </S.ButtonWrap>
+        <S.StyledLink to='/signUp'>이메일로 회원가입</S.StyledLink>
       </S.LoginForm>
-      <S.StyledLink to='/signUp'>이메일로 회원가입</S.StyledLink>
-    </S.LoginSec>
+    </section>
   );
 };
 

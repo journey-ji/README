@@ -2,9 +2,11 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import TopBanner from '../../common/topBanner/TopBanner';
-import getPostDetailAPI from '../../api/getPostDetailAPI';
-import uploadMultipleImgAPI from '../../api/uploadMultipleImgAPI';
-import editPostAPI from '../../api/editPostAPI';
+import {
+  editPostAPI,
+  uploadMultipleImgAPI,
+  getPostDetailAPI,
+} from '../../api/mandarinAPI';
 import { profileImageData } from '../../atoms/LoginData';
 import * as S from './PostEdit.Style';
 
@@ -122,12 +124,10 @@ const PostEdit = () => {
   };
 
   return (
-    <S.PostEdit>
+    <S.PostEdit className='max-width min-width wrapper-contents'>
       <S.PostEditTit>게시글 수정 페이지</S.PostEditTit>
-      <form onSubmit={editPost}>
-        <S.TopBannerCont>
-          <TopBanner type='top-upload-nav' tit='저장' isActive={btnActive} />
-        </S.TopBannerCont>
+      <S.Form onSubmit={editPost}>
+        <TopBanner type='top-upload-nav' tit='저장' isActive={btnActive} />
         <S.UploadCont>
           <S.UserProfileImg src={userProfileImg} alt='' />
           <S.ContentsArea>
@@ -173,7 +173,7 @@ const PostEdit = () => {
             onChange={showImgPreview}
           />
         </S.AddFileLab>
-      </form>
+      </S.Form>
     </S.PostEdit>
   );
 };

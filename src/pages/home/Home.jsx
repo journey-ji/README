@@ -4,7 +4,7 @@ import TopBanner from '../../common/topBanner/TopBanner';
 import TabMenu from '../../common/tabMenu/TabMenu';
 import Post from '../../common/post/Post';
 import Button from '../../common/button/Button';
-import getFollowersPostsAPI from '../../api/getFollowersPostsAPI';
+import { getFollowersPostsAPI } from '../../api/mandarinAPI';
 import logoHome from '../../assets/logo-home.svg';
 import * as S from './Home.Style';
 import PostModal from '../../common/postModal/PostModal';
@@ -24,7 +24,7 @@ const Home = () => {
   }, []);
 
   return (
-    <S.Home>
+    <S.Home className='max-width min-width wrapper-contents'>
       <S.HomeTit>리드미 피드</S.HomeTit>
       <TopBanner type='top-main-nav' tit='READEME' />
       {feedData?.length > 0 ? (
@@ -55,17 +55,15 @@ const Home = () => {
           </div>
         </S.NoPostsPage>
       )}
-      <S.TabMenuCont>
-        <TabMenu />
-        {isModalOpen ? (
-          <PostModal
-            modalType={modalType}
-            modalData={modalData}
-            isModalOpen={isModalOpen}
-            setIsModalOpen={setIsModalOpen}
-          />
-        ) : null}
-      </S.TabMenuCont>
+      <TabMenu />
+      {isModalOpen ? (
+        <PostModal
+          modalType={modalType}
+          modalData={modalData}
+          isModalOpen={isModalOpen}
+          setIsModalOpen={setIsModalOpen}
+        />
+      ) : null}
     </S.Home>
   );
 };

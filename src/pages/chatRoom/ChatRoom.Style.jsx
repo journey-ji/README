@@ -1,6 +1,5 @@
 import styled, { keyframes } from 'styled-components';
 import sprite from '../../assets/css_sprites.png';
-// 주석처리된 코드는 추후 반응형 작업 시 수정 예정입니다
 
 const FadeIn = keyframes`
 from{
@@ -28,11 +27,8 @@ export const ChatRoom = styled.section`
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  width: 390px;
-  height: 820px;
-  /* min-height: calc(100vh - 61px);
-  overflow-y: scroll; */
   background-color: #f2f2f2;
+  overflow: hidden;
 `;
 
 export const ChatRoomTit = styled.h2`
@@ -48,6 +44,10 @@ export const ChatRoomTit = styled.h2`
 export const TopBannerCont = styled.div`
   position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
+  height: 47px;
+  background-color: white;
   animation: ${FadeIn} 0.3s ease-in;
 `;
 
@@ -56,12 +56,9 @@ export const ChatCont = styled.div`
   flex-direction: column;
   justify-content: end;
   gap: 10px;
-  height: 820px;
-  margin-top: 48px;
+  min-height: calc(100vh - 109px);
   margin-bottom: 61px;
-  /* max-height: calc(100vh - 110px); */
-  /* overflow-y: scroll; */
-  padding: 20px 16px;
+  padding: 20px 16px 0 16px;
   animation: ${chatFadeIn} 0.2s linear;
 `;
 
@@ -136,13 +133,13 @@ export const CreatedTime = styled.p`
 `;
 
 export const ChatForm = styled.form`
-  position: absolute;
-  /* position: fixed; */
+  position: fixed;
+  left: 0;
+  right: 0;
   bottom: 0;
   display: flex;
   align-items: center;
   gap: 18px;
-  width: 390px;
   padding: 12px 16px;
   border-top: 0.5px solid var(--sub2-text-color);
   background-color: #ffffff;

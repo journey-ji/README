@@ -1,8 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import { profileImageData } from '../../atoms/LoginData';
-import leaveCommentAPI from '../../api/leaveCommentAPI';
-import getCommentListAPI from '../../api/getCommentListAPI';
+import { getCommentListAPI, leaveCommentAPI } from '../../api/mandarinAPI';
 import * as S from './Comment.Style';
 
 const Comment = ({ postId, setCommentDataArr, setCommentCount }) => {
@@ -37,7 +36,7 @@ const Comment = ({ postId, setCommentDataArr, setCommentCount }) => {
   };
 
   return (
-    <S.CommentCont>
+    <S.CommentCont className='max-width min-width'>
       <S.CommentForm onSubmit={handleSubmit}>
         <S.UserImg src={loginedProfileImg} alt='유저 프로필 이미지' />
         <S.CommentLab htmlFor='comment' />

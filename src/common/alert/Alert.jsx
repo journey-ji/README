@@ -3,9 +3,11 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
 import * as S from './Alert.Style';
 import * as L from '../../atoms/LoginData';
-import deleteProductsAPI from '../../api/deleteProductAPI';
-import deletePostAPI from '../../api/deletePostAPI';
-import deleteCommentAPI from '../../api/deleteCommentAPI';
+import {
+  deleteCommentAPI,
+  deletePostAPI,
+  deleteProductsAPI,
+} from '../../api/mandarinAPI';
 
 /**
  * alert 종류
@@ -68,7 +70,7 @@ const Alert = ({ setIsAlertOpen, alertType, modalData, commentId }) => {
       setIsAlertOpen(false);
       await logOut();
       // alert('로그아웃되었습니다.'); // eslint-disable-line no-alert
-      navigate('../../../login');
+      navigate('/');
     }
     if (alertType === 'deletePost') {
       deletePostAPI(modalData.id).then((req) => {
@@ -95,25 +97,27 @@ const Alert = ({ setIsAlertOpen, alertType, modalData, commentId }) => {
     }
   };
   return (
-    <S.AlertCont>
-      <S.AlertOverlay>
-        <S.AlertTxt>{message}</S.AlertTxt>
-        <S.BtnWrap>
-          <S.Btn
-            color='var(--main-text-color)'
-            border='0.5px solid #dbdbdb'
-            onClick={(e) => {
-              setIsAlertOpen(false);
-            }}
-          >
-            취소
-          </S.Btn>
-          <S.Btn color='var(--main-color)' onClick={clickConfirm}>
-            {btnTxt}
-          </S.Btn>
-        </S.BtnWrap>
-      </S.AlertOverlay>
-    </S.AlertCont>
+    <S.AlertBg onClick={() => setIsAlertOpen(false)}>
+      <S.AlertCont>
+        <S.AlertOverlay>
+          <S.AlertTxt>{message}</S.AlertTxt>
+          <S.BtnWrap>
+            <S.Btn
+              color='var(--main-text-color)'
+              border='0.5px solid #dbdbdb'
+              onClick={(e) => {
+                setIsAlertOpen(false);
+              }}
+            >
+              취소
+            </S.Btn>
+            <S.Btn color='var(--main-color)' onClick={clickConfirm}>
+              {btnTxt}
+            </S.Btn>
+          </S.BtnWrap>
+        </S.AlertOverlay>
+      </S.AlertCont>
+    </S.AlertBg>
   );
 };
 

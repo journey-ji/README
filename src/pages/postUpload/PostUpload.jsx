@@ -2,9 +2,8 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import TopBanner from '../../common/topBanner/TopBanner';
-import uploadPostAPI from '../../api/uploadPostAPI';
+import { uploadPostAPI, uploadMultipleImgAPI } from '../../api/mandarinAPI';
 import * as S from './PostUpload.Style';
-import uploadMultipleImgAPI from '../../api/uploadMultipleImgAPI';
 import { profileImageData } from '../../atoms/LoginData';
 
 const PostUpload = () => {
@@ -78,12 +77,10 @@ const PostUpload = () => {
   };
 
   return (
-    <S.PostUpload>
+    <S.PostUpload className='max-width min-width'>
       <S.PostUploadTit>게시글 업로드 페이지</S.PostUploadTit>
-      <form onSubmit={uploadPost}>
-        <S.TopBannerCont>
-          <TopBanner type='top-upload-nav' tit='업로드' isActive={btnActive} />
-        </S.TopBannerCont>
+      <S.Form onSubmit={uploadPost}>
+        <TopBanner type='top-upload-nav' tit='업로드' isActive={btnActive} />
         <S.UploadCont>
           <S.UserProfileImg src={userProfileImg} alt='' />
           <S.ContentsArea>
@@ -129,7 +126,7 @@ const PostUpload = () => {
             onChange={showImgPreview}
           />
         </S.AddFileLab>
-      </form>
+      </S.Form>
     </S.PostUpload>
   );
 };

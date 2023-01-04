@@ -21,7 +21,7 @@ const ChatRoom = () => {
 
   return (
     <>
-      <S.ChatRoom>
+      <S.ChatRoom className='min-width wrapper-contents'>
         <S.ChatRoomTit>채팅방 페이지</S.ChatRoomTit>
         <S.TopBannerCont>
           <TopBanner
@@ -67,7 +67,7 @@ const ChatRoom = () => {
             <S.CreatedTime>12:39</S.CreatedTime>
           </S.YourMsgCont> */}
         </S.ChatCont>
-        <S.ChatForm action=''>
+        <S.ChatForm action='' className='min-width'>
           <S.FileInpLab htmlFor='fileInp'>
             <input
               type='file'

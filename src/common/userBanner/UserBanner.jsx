@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useRecoilValue } from 'recoil';
-import followAPI from '../../api/followAPI';
-import unfollowAPI from '../../api/unfollowAPI';
+import { followAPI, unfollowAPI } from '../../api/mandarinAPI';
 import { accountnameData } from '../../atoms/LoginData';
 import Button from '../button/Button';
 import * as S from './UserBanner.Style';
@@ -27,7 +26,7 @@ const UserBanner = ({ data }) => {
     }
   };
   return (
-    <S.UserBannerWrapper>
+    <S.UserBannerWrapper className='max-width min-width'>
       <S.UserImg src={data.image} />
       <S.UserInfo
         // 이거 상위 경로로 한번에 보내고싶은데 방법없나 ?

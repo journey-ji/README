@@ -7,7 +7,6 @@ export const ProfileDiv = styled.div`
   height: 314px;
   display: flex;
   flex-direction: column;
-  margin-top: 0.5px;
   margin-bottom: 6px;
   background-color: white;
 `;
@@ -15,7 +14,8 @@ export const FollowNPicDiv = styled.div`
   display: flex;
   justify-content: space-between;
   margin-top: 30px;
-  margin: 30px 55px 16px;
+  width: 290px;
+  margin: 30px auto 16px;
 `;
 export const FollowersLink = styled(Link)`
   font-size: 18px;
@@ -86,7 +86,7 @@ export const ContentSpan = styled.span`
 
 export const BtnsCont = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   text-align: center;
   margin: 0px 91px 26px;
   gap: 12px;

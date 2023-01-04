@@ -1,12 +1,21 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { useSetRecoilState } from 'recoil';
 import TopBanner from '../../common/topBanner/TopBanner';
 import InputBox from '../../common/inputBox/InputBox';
-import loadProfileAPI from '../../api/loadProfileAPI';
-import accountnameValidAPI from '../../api/accountnameValidAPI';
-import uploadImgAPI from '../../api/uploadImgAPI';
-import editProfileAPI from '../../api/editProfileAPI';
+import {
+  loadProfileAPI,
+  uploadImgAPI,
+  editProfileAPI,
+  accountnameValidAPI,
+} from '../../api/mandarinAPI';
 import logoProfile from '../../assets/logo-profile.svg';
+import {
+  usernameData,
+  accountnameData,
+  introData,
+  profileImageData,
+} from '../../atoms/LoginData';
 import * as S from './ProfileEdit.Style';
 
 const ProfileEdit = () => {
@@ -21,6 +30,11 @@ const ProfileEdit = () => {
   const [userImg, setUserImg] = useState('');
   const [validId, setValidId] = useState(true);
   const [userIdMsg, setUserIdMsg] = useState('');
+
+  const setEditedProfileImg = useSetRecoilState(profileImageData);
+  const setEditedAccoutName = useSetRecoilState(accountnameData);
+  const setEditedUserName = useSetRecoilState(usernameData);
+  const setEditedIntro = useSetRecoilState(introData);
 
   // 기존 프로필 정보 불러오기
   useEffect(() => {
@@ -41,7 +55,7 @@ const ProfileEdit = () => {
   // 이미지 업로드
   const uploadImg = async (e) => {
     const imgFile = e.target.files[0];
-    const imgUrl = await uploadImgAPI(imgFile);
+    const imgUrl = URL.createObjectURL(imgFile);
     setUserImg(imgUrl);
     setBtnActive(true);
   };
@@ -109,19 +123,39 @@ const ProfileEdit = () => {
     }
   };
 
+  // 기존 프로필에서 받아온 이미지 url을 file객체로 변환
+  const urlToFileObject = async (imgUrl) => {
+    const response = await fetch(imgUrl);
+    const blob = await response.blob();
+    const file = new File([blob], 'image.jpg', { type: blob.type });
+    return file;
+  };
+
   // 프로필 수정 데이터 전송
   const editProfile = async (e) => {
     e.preventDefault();
     if (btnActive) {
-      await editProfileAPI(userName, userId, userIntro, userImg);
-      // console.log(accountName);
+      const convertedUserImg = await urlToFileObject(userImg);
+      const uerImg = await uploadImgAPI(convertedUserImg);
+      const updatedUserData = await editProfileAPI(
+        userName,
+        userId,
+        userIntro,
+        uerImg,
+      );
+      setEditedProfileImg(updatedUserData.image);
+      setEditedAccoutName(updatedUserData.accountname);
+      setEditedUserName(updatedUserData.username);
+      setEditedIntro(updatedUserData.intro);
       // alert('프로필 수정이 완료되었습니다.'); // eslint-disable-line no-alert
-      navigate(`/profile/${userId}`);
+      if (validId) {
+        navigate(`/profile/${userId}`);
+      }
     }
   };
 
   return (
-    <S.ProfileEditWrap>
+    <S.ProfileEditWrap className='max-width min-width wrapper-contents'>
       <S.ProfileEditTit>프로필 수정 페이지</S.ProfileEditTit>
       <form onSubmit={editProfile}>
         <TopBanner type='top-upload-nav' tit='저장' isActive={btnActive} />

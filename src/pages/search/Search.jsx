@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import TopBanner from '../../common/topBanner/TopBanner';
 import TabMenu from '../../common/tabMenu/TabMenu';
-import searchUserAPI from '../../api/searchUserAPI';
+import { searchUserAPI } from '../../api/mandarinAPI';
 import * as S from './Search.Style';
 
 const Search = () => {
@@ -28,7 +28,7 @@ const Search = () => {
   }, [searchVal]);
 
   return (
-    <S.Search>
+    <S.Search className='max-width min-width wrapper-contents'>
       <S.SearchTit>사용자 검색 페이지</S.SearchTit>
       <TopBanner type='top-search-nav' setSearchVal={setSearchVal} />
       {searchVal && (

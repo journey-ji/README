@@ -67,6 +67,20 @@ const GlobalStyled = createGlobalStyle`
     word-break: initial;
     word-wrap: initial;
   }
+
+  .max-width {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .min-width {
+    min-width: 390px;
+  }
+
+  .wrapper-contents {
+    margin-top: 48px;
+    max-height: calc(100vh - 60px);
+  }
 `;
 
 export default GlobalStyled;

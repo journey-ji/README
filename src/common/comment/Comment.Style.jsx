@@ -1,13 +1,19 @@
 import styled from 'styled-components';
 
 export const CommentCont = styled.div`
-  width: 390px;
-  height: 61px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-top: 0.5px solid var(--sub2-text-color);
+  background-color: #fff;
+  z-index: 30;
 `;
 
 export const CommentForm = styled.form`
   display: flex;
   align-items: center;
+  justify-content: space-between;
   padding: 13px 16px 12px 16px;
 `;
 
@@ -29,9 +35,9 @@ export const CommentLab = styled.label`
 `;
 
 export const CommentInp = styled.input`
-  width: 260px;
-  height: 18px;
-  margin-left: 18px;
+  min-width: 260px;
+  max-width: 660px;
+  width: calc(100vw - 118px);
   font-size: 14px;
   color: var(--main-text-color);
   border: none;
@@ -48,7 +54,6 @@ export const CommentInp = styled.input`
 export const PostBtn = styled.button`
   width: 26px;
   height: 18px;
-  margin-left: auto;
   font-size: 14px;
   color: ${(props) => (props.isBtnActive ? 'var(--main-color)' : '#c4c4c4')};
 `;

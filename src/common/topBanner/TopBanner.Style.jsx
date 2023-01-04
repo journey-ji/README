@@ -3,14 +3,20 @@ import { Link } from 'react-router-dom';
 import imgSprite from '../../assets/css_sprites.png';
 
 const BannerCont = styled.div`
-  width: 390px;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0px;
   height: 48px;
+  margin: 0 auto;
   background-color: white;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
   border-bottom: 0.5px solid #dbdbdb;
   padding: 0 16px;
+  z-index: 100;
 `;
 const BackBtn = styled.button`
   width: 22px;
@@ -19,6 +25,7 @@ const BackBtn = styled.button`
   margin: 13px 10px 13px 0px;
   cursor: pointer;
 `;
+
 const MoreBtn = styled.button`
   width: 24px;
   height: 24px;
@@ -31,7 +38,6 @@ const SearchInp = styled.input.attrs({
   placeholder: '계정 검색',
 })`
   display: block;
-  width: 316px;
   height: 32px;
   border-radius: 32px;
   margin: 8px 0px;
@@ -40,6 +46,7 @@ const SearchInp = styled.input.attrs({
   opacity: 0.4;
   padding: 0px 16px;
   font-size: 14px;
+  flex-grow: 1;
 `;
 
 const SearchBtn = styled(Link)`

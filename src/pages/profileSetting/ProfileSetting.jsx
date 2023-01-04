@@ -9,10 +9,12 @@ import {
   profileImageData,
   usernameData,
 } from '../../atoms/LoginData';
-import emailLoginAPI from '../../api/emailLoginAPI';
-import joinAPI from '../../api/joinAPI';
-import uploadImgAPI from '../../api/uploadImgAPI';
-import accountnameValidAPI from '../../api/accountnameValidAPI';
+import {
+  emailLoginAPI,
+  joinAPI,
+  uploadImgAPI,
+  accountnameValidAPI,
+} from '../../api/mandarinAPI';
 
 import InputBox from '../../common/inputBox/InputBox';
 import Button from '../../common/button/Button';
@@ -130,7 +132,7 @@ const ProfileSetting = () => {
         setIntroData(loginedUserData.user.intro);
         setProfileImageData(loginedUserData.user.image);
 
-        navigate('/', { replace: true });
+        navigate('/home', { replace: true });
       } catch (error) {
         console.log(error);
       }
@@ -138,7 +140,7 @@ const ProfileSetting = () => {
   };
 
   return (
-    <S.ProfileSettingWrap>
+    <section className='max-width min-width wrapper-contents'>
       <S.ProfileSettingTit>프로필 설정 페이지</S.ProfileSettingTit>
       <S.Title>프로필 설정</S.Title>
       <S.Description>나중에 언제든지 변경할 수 있습니다.</S.Description>
@@ -191,7 +193,7 @@ const ProfileSetting = () => {
           />
         </S.BtnWrap>
       </form>
-    </S.ProfileSettingWrap>
+    </section>
   );
 };
 

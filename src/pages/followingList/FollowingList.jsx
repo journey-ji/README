@@ -4,7 +4,7 @@ import TopBanner from '../../common/topBanner/TopBanner';
 import TabMenu from '../../common/tabMenu/TabMenu';
 import UserBanner from '../../common/userBanner/UserBanner';
 import * as S from './FollowingList.Style';
-import loadFollowingListAPI from '../../api/loadFollowingListAPI';
+import { loadFollowingListAPI } from '../../api/mandarinAPI';
 
 const FollowingList = () => {
   const [isFollowing, setIsFollowing] = useState(null);
@@ -18,7 +18,7 @@ const FollowingList = () => {
     loadFollowing();
   }, []);
   return (
-    <S.FollowingListWrap>
+    <S.FollowingListWrap className='max-width min-width wrapper-contents'>
       <S.FollowingListTit>팔로잉 리스트 페이지</S.FollowingListTit>
       <TopBanner type='top-follow-nav' tit='Followings' />
       <S.ListCont>
